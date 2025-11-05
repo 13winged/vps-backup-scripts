@@ -1,0 +1,96 @@
+# VPS Backup Scripts Configuration
+# Copy this file to 'config' in the script directory and modify as needed
+
+# ===== BASIC SETTINGS =====
+
+# Backup directory
+BACKUP_DIR="/backup"
+
+# Database backup directory (default: BACKUP_DIR/databases)
+DB_BACKUP_DIR="/backup/databases"
+
+# Retention period in days
+RETENTION_DAYS=7
+
+# Log files
+LOG_FILE="/var/log/vps-backup.log"
+DB_LOG_FILE="/var/log/db-backup.log"
+INTEGRITY_LOG_FILE="/var/log/integrity-check.log"
+
+# Compression level (1-9, where 1 is fastest, 9 is best compression)
+COMPRESSION_LEVEL=6
+
+# ===== INTEGRITY CHECK SETTINGS =====
+
+# Enable integrity verification for backups
+ENABLE_INTEGRITY_CHECK=true
+
+# Test database restoration during integrity check (requires DB credentials)
+TEST_DB_RESTORATION=false
+
+# Verify checksums during integrity check
+VERIFY_CHECKSUMS=true
+
+# ===== BACKUP SETTINGS =====
+
+# Enable/disable backup types
+BACKUP_SYSTEM_FILES=true
+BACKUP_WEB_DIRS=true
+BACKUP_MYSQL=true
+BACKUP_POSTGRES=true
+
+# ===== DATABASE SETTINGS =====
+
+# MySQL configuration
+MYSQL_USER="root"
+# MYSQL_PASSWORD="your_password"  # Uncomment if needed
+MYSQL_HOST="localhost"
+MYSQL_PORT="3306"
+
+# PostgreSQL configuration
+PG_USER="postgres"
+# PG_PASSWORD="your_password"    # Uncomment if needed
+PG_HOST="localhost"
+PG_PORT="5432"
+
+# ===== REMOTE BACKUP SETTINGS =====
+
+# Enable remote backup sync
+REMOTE_ENABLE=false
+REMOTE_USER="backup"
+REMOTE_HOST="backup-server.com"
+REMOTE_PATH="/backups/"
+REMOTE_PORT=22
+
+# ===== NOTIFICATION SETTINGS =====
+
+# Email notifications (requires mail command)
+EMAIL_ENABLE=false
+EMAIL_TO="admin@example.com"
+
+# ===== ADVANCED SETTINGS =====
+
+# Exclude patterns (space-separated)
+EXCLUDE_PATTERNS="*.tmp *.log cache node_modules *.cache"
+
+# Maximum backup file size (in MB, 0 = unlimited)
+MAX_BACKUP_SIZE=0
+
+# Backup performance settings
+TAR_OPTIONS="--warning=no-file-changed"
+MYSQL_OPTIONS="--single-transaction --quick"
+PG_OPTIONS="--no-password"
+
+# ===== CRON SETTINGS =====
+
+# Full backup schedule (cron format)
+FULL_BACKUP_SCHEDULE="0 2 * * *"      # Daily at 2:00 AM
+
+# Database backup schedule
+DB_BACKUP_SCHEDULE="0 */6 * * *"      # Every 6 hours
+
+# Integrity check schedule
+INTEGRITY_CHECK_SCHEDULE="0 4 * * *"   # Daily at 4:00 AM
+
+# Cleanup schedule
+CLEANUP_SCHEDULE="0 3 * * 0"          # Weekly on Sunday at 3:00 AM
