@@ -175,7 +175,7 @@ ExecStart=/opt/vps-backup-scripts/scripts/backup-vps.sh
 ### Emergency Recovery
 ```bash
 # 1. Extract backup
-tar -xzf vps-backup-2024-01-15_02-00-01.tar.gz
+tar -xzf vps-backup-2001-01-01_01-00-01.tar.gz
 
 # 2. Restore MySQL databases
 for db_file in mysql/*.sql.gz; do
